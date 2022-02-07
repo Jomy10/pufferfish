@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
     s.authors = ["Jonas everaert"]
     s.email = ["info@jonaseveraert.be"]
     s.homepage = "https://github.com/jomy10/pufferfish"
-    s.add_runtime_dependency "htmlbeautifier"
+    s.add_runtime_dependency "htmlbeautifier", "~> 1.4.1"
     s.license = "MIT"
     s.files = Dir.glob("{lib,bin}/**/*")
     s.require_path = "lib"

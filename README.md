@@ -72,6 +72,9 @@ ruby Config.rb
 
 ## Download
 You can get Pufferfish from ruby gems.
+```bash
+gem install pufferfish
+```
 
 
 ## Integrations
