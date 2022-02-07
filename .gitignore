@@ -1,1 +1,2 @@
-pufferfish-[0-9.]*.gems
+**/pufferfish-[0-9.]*.gems
+**/.DS_Store*
