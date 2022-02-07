@@ -2,19 +2,33 @@
 
 Pufferfish is an extensible html templating engine that generates raw html, meaning that it will not affect load times of websites.
 
-A full-blown javascript framework is sometimes a bit overkill for a static website. Pufferfish adds some simple templating to html so you don't have to use ssuch a framework for small projects or for pages that require fast loading. Pufferfish will compile your files to raw html.
+A full-blown javascript framework is sometimes a bit overkill for a static website. Pufferfish adds some simple templating to html so you don't have to use such a framework for small projects or for pages that require fast loading. Pufferfish will compile your files to raw html.
+
+<details>
+    <summary>Table of contents</summary>
+
+- [Overview](#overview)
+    - [Syntax](#syntax)
+    - [Compiling html](#compiling-your-html)
+    - [Build file](#build-file)
+- [Download](#download)
+- [Integrations](#integrations)
+- [Contributing](#contributing)
+- [License](#license)
+</details>
 
 ## Overview
+### Syntax
 To include a template file inside of html, simply write `%filename%`.
 
 **Example**
 ```html
 <html>
-    <body>
-        %menu%
-        %header.html%
-        %footer.handlebars%
-    </body>
+  <body>
+    %menu%
+    %header.html%
+    %footer.handlebars%
+  </body>
 </html>
 ```
 
@@ -84,6 +98,6 @@ Pufferfish is made so it can be included in other build processes. It also inclu
 Contributions are always welcome. Read the [CONTRIBUTING](CONTRIBUTING.md) file for more information!
 
 ## License
-Pufferfish is licensed undr the [MIT license](LICENSE).
+Pufferfish is licensed under the [MIT license](LICENSE).
 
 © Jonas Everaert 2022
