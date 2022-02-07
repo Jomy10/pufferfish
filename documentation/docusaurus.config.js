@@ -9,7 +9,7 @@ const config = {
   title: 'Pufferfish',
   tagline: 'An extensible html templating engine that generates raw html, meaning that it will not affect load times of websites',
   url: 'https://jomy10.github.io',
-  baseUrl: '/',
+  baseUrl: '/pufferfish/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
