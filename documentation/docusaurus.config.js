@@ -8,8 +8,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Pufferfish',
   tagline: 'An extensible html templating engine that generates raw html, meaning that it will not affect load times of websites',
-  url: 'https://jomy10.github.io',
-  baseUrl: '/pufferfish/',
+  url: 'https://pufferfish.jonaseveraert.be',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
