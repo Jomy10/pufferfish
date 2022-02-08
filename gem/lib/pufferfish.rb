@@ -9,14 +9,20 @@ module Pufferfish
             contents = File.read(file)
             
             # ^\\ -> don't count escape characters \%
-            contents = contents.gsub(/%(.*[^\\])%/) { |_|
+            # ? -> smallest possible match
+            contents = contents.gsub(/%(.*?[^\\])%/) { |_|
                 match = Regexp.last_match.captures
                 file = match[0]
-                if not (file =~ /.*\..*/)
-                    file.concat(".html")
+                file = file
+                if file != ""
+                    # Append file extension (TODO: set in config)
+                    if not (file =~ /.*\..*/)
+                        file.concat(".html")
+                    end
+
                     # Parse base dir
                     if not base_dir.nil?
-                        if file =~ /\A\/.*\z/
+                        if file =~ /\A\/.*\z/ # ?
                             parse_file(file, base_dir)
                         elsif base_dir =~ /\A.*\/\z/
                             parse_file("#{base_dir}#{file}", base_dir)
@@ -26,6 +32,8 @@ module Pufferfish
                     else
                         parse_file(file, base_dir)
                     end
+                else
+                    STDERR.puts "found empty template identifier %%. If this is intential, consider escaping: \\%\\%"
                 end
             }
 
