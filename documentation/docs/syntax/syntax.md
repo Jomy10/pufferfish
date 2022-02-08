@@ -1,6 +1,6 @@
 ---
 title: Syntax
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 To include a template file inside of html, simply write `%filename%`.
