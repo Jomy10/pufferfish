@@ -97,7 +97,9 @@ You can also download it from GitHub packages:
 gem install pufferfish --source "https://rubygems.pkg.github.com/jomy10"
 ```
 
+<!--
 If you want to, you can download it from npm `npm i pufferfish-html -g`, but I would recommend getting the Gems version.
+-->
 
 ## Integrations
 Pufferfish is made so it can be included in other build processes. It also includes integrations with [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier) and [html-minifier](https://github.com/kangax/html-minifier) when using the [build file](#build-file).
