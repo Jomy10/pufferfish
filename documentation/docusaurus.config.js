@@ -25,14 +25,14 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          editUrl: 'https://github.com/jomy10/pufferfish/documentation',
+          editUrl: 'https://github.com/jomy10/pufferfish/tree/master/documentation',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           //editUrl:
           //  'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          editUrl: 'https://github.com/jomy10/pufferfish',
+          editUrl: 'https://github.com/jomy10/pufferfish/tree/master/documentation',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
