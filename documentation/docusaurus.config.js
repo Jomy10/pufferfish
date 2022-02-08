@@ -27,13 +27,13 @@ const config = {
           // editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           editUrl: 'https://github.com/jomy10/pufferfish/tree/master/documentation',
         },
-        blog: {
+        /*blog: {
           showReadingTime: true,
           // Please change this to your repo.
           //editUrl:
           //  'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           editUrl: 'https://github.com/jomy10/pufferfish/tree/master/documentation',
-        },
+        },*/
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -97,10 +97,10 @@ const config = {
           {
             title: 'More',
             items: [
-              {
+              /*{
                 label: 'Blog',
                 to: '/blog',
-              },
+              },*/
               {
                 label: 'GitHub',
                 href: 'https://github.com/jomy10/pufferfish',
