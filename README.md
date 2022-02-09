@@ -105,7 +105,7 @@ If you want to, you can download it from npm `npm i pufferfish-html -g`, but I w
 Pufferfish is made so it can be included in other build processes. It also includes integrations with [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier) and [html-minifier](https://github.com/kangax/html-minifier) when using the [build file](#build-file).
 
 ## Contributing
-Contributions are always welcome. Read the [CONTRIBUTING](CONTRIBUTING.md) file for more information!
+Contributions are always welcome. Read the [CONTRIBUTING](.github/CONTRIBUTING.md) file for more information!
 
 ## License
 Pufferfish is licensed under the [MIT license](LICENSE).

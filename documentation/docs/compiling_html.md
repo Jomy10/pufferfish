@@ -6,9 +6,8 @@ sidebar_position: 3
 You can either use the cli, or the [build file](#build-file) for compiling html. The latter is the easiest and most complete.
 
 ## Build file
-Pufferfish also includes a build file you can specify.
 
-You can name the file anyway you want. In the following example, it will be called `Config.rb`.
+Pufferfish includes a build file. You can name the file anyway you want. In the following example, it will be called `Config.rb`.
 
 ```ruby title=Config.rb
 require 'pufferfish'
@@ -39,6 +38,8 @@ ruby Config.rb
 
 ## CLI
 
+The CLI is a good fit if you just want to compile a single file. It does not contain a minify option, though.
+
 **Usage:**
 ```bash
 puf <filename> [output_filename] -d [template_dir] -p
@@ -48,3 +49,4 @@ puf <filename> [output_filename] -d [template_dir] -p
 - `output_filename`: the file name of the compiled html file (default: stdout)
 - `-d`: specifies a directory where pufferfish will look for templates. (default: .)
 - `-p`: prettify html
+

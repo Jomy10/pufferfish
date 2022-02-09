@@ -23,12 +23,10 @@ Pufferfish allows you to use templates inside of your html and compile it to reg
 <p>I am inserted by Pufferfish!</p>
 ```
 
-**Results after compiling**:
+**Result after compiling**:
 ```html
 <html>
-    <head>
-        <!--...-->
-    </head>
+    <head></head>
     <body>
         <h1>The text below was inserted by Pufferfish!</h1>
         <p>I am inserted by Pufferfish!</p>
