@@ -4,7 +4,7 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
-/** @type {import('@docusaurus/types').Config} */
+/* @type {import('@docusaurus/types').Config} -> disabled */
 const config = {
   title: 'Pufferfish',
   tagline: 'An extensible html templating engine that generates raw html, meaning that it will not affect load times of websites',
