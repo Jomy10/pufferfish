@@ -1,2 +1,3 @@
 example/**/* linguist-documentation
-documentation linguist-documentation
+documentation/**/* linguist-documentation
+docs/**/* linguist-documentation
