@@ -1,0 +1,7 @@
+[project]
+html_dir = "html" # default: html
+template_dir = "templates" # default: templates
+output_dir = "output" # default: output
+pretty = true # default: false
+minify = false # default: false
+verbose = true # default: false
