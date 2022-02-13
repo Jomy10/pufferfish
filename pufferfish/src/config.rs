@@ -1,5 +1,4 @@
 use std::fs;
-use std::path::Path;
 use regex::Regex;
 use serde::Deserialize;
 
@@ -14,16 +13,17 @@ struct ProjectConfig {
     html_dir: Option<String>,
     template_dir: Option<String>,
     output_dir: Option<String>,
+    cache_dir: Option<String>,
     pretty: Option<bool>,
     minify: Option<bool>,
-    verbose: Option<bool>
+    verbose: Option<bool>,
 }
 
 impl PufferfishConfig {
     pub fn from_toml(file_path: &str) -> Self {
         toml::from_str(
             fs::read_to_string(file_path)
-                .expect(&format!("Coudn't find {}", file_name_from_path(file_path))).as_str()
+                .expect(&format!("Couldn't find {}", file_name_from_path(file_path))).as_str()
         ).expect(&format!("Couldn't parse {}", file_name_from_path(file_path)))
     }
 }
@@ -53,6 +53,14 @@ impl PufferfishConfig {
         }
     }
     
+    pub fn cache_dir(&self) -> String {
+        if let Some(project) = &self.project {
+            project.cache_dir.clone().unwrap_or(".pufferfish".to_string())
+        } else {
+            ".pufferfish".to_string()
+        }
+    }
+    
     pub fn pretty(&self) -> bool {
         if let Some(project) = &self.project {
             project.pretty.unwrap_or(false)
@@ -79,6 +87,6 @@ impl PufferfishConfig {
 }
 
 fn file_name_from_path(file_path: &str) -> &str {
-    let r = Regex::new(r".*/(.*)?").unwrap().find(file_path).unwrap();
+    let r = Regex::new(r".*/?(.*)?").unwrap().find(file_path).unwrap();
     &file_path[r.start()..r.end()]
 }
