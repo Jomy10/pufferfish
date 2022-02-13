@@ -1,4 +1,5 @@
 use clap::{arg, App, AppSettings, Arg};
+use minify_html::{Cfg, minify};
 use pufferfish::cli::CLIExecutor;
 
 // TODO: cached; make a tree of files and their templates ('dependencies' -> remake all files depending on the changed file)
@@ -31,6 +32,11 @@ fn main() {
                 .about("Starts the file listener, building files as they get updated")
         )
         .get_matches();
+    
+    // match rutie::VM::eval("puts \"hello\"") {
+    //     Ok(e) => println!("{:?}", e),
+    //     Err(e) => println!("{}", e)
+    // }
     
     CLIExecutor::new(matches).execute();
 }
