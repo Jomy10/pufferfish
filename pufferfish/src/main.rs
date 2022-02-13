@@ -1,5 +1,4 @@
 use clap::{arg, App, AppSettings, Arg};
-use minify_html::{Cfg, minify};
 use pufferfish::cli::CLIExecutor;
 
 // TODO: cached; make a tree of files and their templates ('dependencies' -> remake all files depending on the changed file)

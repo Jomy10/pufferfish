@@ -2,7 +2,7 @@ pub mod config;
 pub mod cli;
 pub mod parser;
 pub use puf_dirs::*;
-
+pub mod build_html;
 
 mod puf_dirs {
     use std::fs;
