@@ -3,6 +3,8 @@ pub mod cli;
 pub mod parser;
 pub use puf_dirs::*;
 pub mod build_html;
+pub mod dev_server;
+pub mod html_dependencies;
 
 mod puf_dirs {
     use std::fs;

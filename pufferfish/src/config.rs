@@ -1,14 +1,14 @@
-use std::cmp::min;
 use std::fs;
 use regex::Regex;
 use serde::Deserialize;
-use crate::puf_arg;
+use crate::{puf_arg, puf_arg_string};
 
 #[derive(Deserialize, Debug)]
 /// Pufferfish config specified in toml
 pub struct PufferfishConfig {
     project: ProjectConfig,
-    minify: Option<MinifyConfig>
+    minify: Option<MinifyConfig>,
+    server: Option<ServerConfig>
 }
 
 #[derive(Deserialize, Debug)]
@@ -17,6 +17,7 @@ struct ProjectConfig {
     template_dir: Option<String>,
     output_dir: Option<String>,
     cache_dir: Option<String>,
+    dev_dir: Option<String>,
     pretty: Option<bool>,
     minify: Option<bool>,
     verbose: Option<bool>,
@@ -37,12 +38,48 @@ struct MinifyConfig {
     remove_processing_instructions : Option<bool>,
 }
 
+#[derive(Deserialize, Debug)]
+struct ServerConfig {
+    port: Option<String>
+}
+
 impl PufferfishConfig {
     pub fn from_toml(file_path: &str) -> Self {
         toml::from_str(
             fs::read_to_string(file_path)
                 .expect(&format!("Couldn't find {}", file_name_from_path(file_path))).as_str()
         ).expect(&format!("Couldn't parse {}", file_name_from_path(file_path)))
+    }
+    
+    pub fn new() -> Self {
+        Self {
+            project: ProjectConfig {
+                html_dir: None,
+                template_dir: None,
+                output_dir: None,
+                cache_dir: None,
+                dev_dir: None,
+                pretty: None,
+                minify: None,
+                verbose: None
+            },
+            minify: None,
+            server: None
+        }
+    }
+    
+    pub fn set_server_port(&mut self, port: &str) {
+        if let Some(conf) = &mut self.server {
+            conf.port = Some(port.to_string());
+        } else {
+            self.server = Some(ServerConfig {
+                port: Some(port.to_string())
+            });
+        }
+    }
+    
+    pub fn set_verbose(&mut self, verbose: bool) {
+        self.project.verbose = Some(verbose);
     }
 }
 // Project
@@ -61,6 +98,10 @@ impl PufferfishConfig {
     
     pub fn cache_dir(&self) -> String {
         self.project.cache_dir.clone().unwrap_or(".pufferfish".to_string())
+    }
+    
+    pub fn dev_dir(&self) -> String {
+        self.project.dev_dir.clone().unwrap_or(self.output_dir())
     }
     
     pub fn pretty(&self) -> bool {
@@ -130,6 +171,12 @@ impl PufferfishConfig {
         puf_arg!(self.minify, remove_processing_instructions, false)
     }
 }
+// Server
+impl PufferfishConfig {
+    pub fn server_port(&self) -> String {
+        puf_arg_string!(self.server, port, "8080".to_string())
+    }
+}
 
 #[derive(PartialEq)]
 pub enum MinifyMethod {
@@ -149,6 +196,17 @@ macro_rules! puf_arg {
     ( $setting: expr, $field: ident, $default_value: expr ) => (
         if let Some(val) = &$setting {
             val.$field.unwrap_or($default_value)
+        } else {
+            $default_value
+        }
+    )
+}
+
+#[macro_export]
+macro_rules! puf_arg_string {
+    ( $setting: expr, $field: ident, $default_value: expr ) => (
+        if let Some(val) = &$setting {
+            val.$field.clone().unwrap_or($default_value)
         } else {
             $default_value
         }
