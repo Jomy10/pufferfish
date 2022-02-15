@@ -56,7 +56,7 @@ fn main() {
         }
         FileListener::start_html(listener_data, tx, &PufferfishConfig::new(), |file_name| {
             println!("Changed {file_name}");
-            // build this file and all files depending on it
+            // TODO: build this file and all files depending on it (to dev_dir)
             let list = &listener_data_closure.lock().unwrap().dependant_list;
             tx_closure.send(()).unwrap();
         });
@@ -69,7 +69,7 @@ fn main() {
         }
         FileListener::start_templates(listener_data_templates, tx_templates, &PufferfishConfig::new(), |file_name| {
             println!("Changed {file_name}");
-            // build this file and all files depending on it
+            // TODO: build this file and all files depending on it
             let list = &listener_data_templates_closure.lock().unwrap().dependant_list;
             tx_templates_closure.send(()).unwrap();
         });
