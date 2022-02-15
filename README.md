@@ -111,7 +111,15 @@ Go to the dedicated [documentation](pufferfish.jonaseveraert.be/docs) or [tutori
 
 
 ## Download
-Currently, the way to download this is by going to the [Github releases](https://github.com/Jomy10/pufferfish/releases) and downloading the correct build for your operatin system 
+
+You can download Pufferfish with the following command:
+
+```bash
+
+```
+
+### Manual installation
+Head over to the [Github releases](https://github.com/Jomy10/pufferfish/releases) page and download the correct build for your operatin system. You now have an executable which can bee moved to the correct directory.
 
 <!--
 If you want to, you can download it from npm `npm i pufferfish-html -g`, but I would recommend getting the Gems version.
