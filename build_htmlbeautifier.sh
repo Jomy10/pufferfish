@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+# Builds the beautifier.rb script in pufferfish/src/html_beautifier/beautifier.rb
+
 RESULT_FILE="pufferfish/src/html_beautifier/beautifier.rb"
 touch $RESULT_FILE
 echo "require \"strscan\"" > $RESULT_FILE
