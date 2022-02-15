@@ -3,9 +3,9 @@ use std::sync::mpsc::channel;
 use std::{fs, thread};
 use std::thread::Thread;
 use clap::{arg, App, AppSettings, Arg};
-use pufferfish::cli::CLIExecutor;
-use pufferfish::config::PufferfishConfig;
-use pufferfish::file_listener::FileListener;
+use puf::cli::CLIExecutor;
+use puf::config::PufferfishConfig;
+use puf::file_listener::FileListener;
 
 // TODO: cached; make a tree of files and their templates ('dependencies' -> remake all files depending on the changed file)
 fn main() {
@@ -38,7 +38,7 @@ fn main() {
     let config = PufferfishConfig::new();
     let verbose_1 = config.verbose();
     let verbose_2 = config.verbose();
-    let mut listener = pufferfish::file_listener::FileListener::new(config);
+    let mut listener = puf::file_listener::FileListener::new(config);
     
     let listener = Arc::new(Mutex::new(listener));
     
