@@ -1,6 +1,6 @@
 use std::sync::{Arc, Mutex};
 use std::sync::mpsc::channel;
-use std::thread;
+use std::{fs, thread};
 use std::thread::Thread;
 use clap::{arg, App, AppSettings, Arg};
 use pufferfish::cli::CLIExecutor;
@@ -32,13 +32,9 @@ fn main() {
             App::new("start")
                 .about("Starts the development server")
         )
-        .subcommand(
-            App::new("start-listener")
-                .about("Starts the file listener, building files as they get updated")
-        )
         .get_matches();
     
-    // File listener
+    /*
     let config = PufferfishConfig::new();
     let verbose_1 = config.verbose();
     let verbose_2 = config.verbose();
@@ -77,11 +73,13 @@ fn main() {
     
     h.join();
     t.join();
+
+     */
     
     // match rutie::VM::eval("puts \"hello\"") {
     //     Ok(e) => println!("{:?}", e),
     //     Err(e) => println!("{}", e)
     // }
     
-    // CLIExecutor::new(matches).execute();
+    CLIExecutor::new(matches).execute();
 }

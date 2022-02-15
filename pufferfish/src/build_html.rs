@@ -2,7 +2,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use minify_html::minify;
 use crate::config::{MinifyMethod, PufferfishConfig};
-use crate::parser;
+use crate::{html_beautifier, parser};
 
 /// Build & write 1 file
 pub fn build_html_file(file: &Path, config: &PufferfishConfig, clean: bool) {
@@ -16,6 +16,10 @@ pub fn build_html_file(file: &Path, config: &PufferfishConfig, clean: bool) {
             let mut parsed = unsafe{ parsed.as_bytes_mut() };
             build_minify_onepass(&mut parsed, output_dir, file, config);
         }
+    } else if config.pretty() {
+        let parsed = html_beautifier::beautify(&parsed).expect("Could not beautify html");
+        fs::write(PathBuf::from(output_dir).join(&file.file_name().unwrap()), parsed)
+            .expect(&format!("Couldn't write file {:?}", PathBuf::from(output_dir).join(&file.file_name().unwrap())));
     } else {
         fs::write(PathBuf::from(output_dir).join(&file.file_name().unwrap()), parsed)
             .expect(&format!("Couldn't write file {:?}", PathBuf::from(output_dir).join(&file.file_name().unwrap())));
