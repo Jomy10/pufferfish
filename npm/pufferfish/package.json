@@ -1,0 +1,25 @@
+{
+  "name": "pufferfish",
+  "version": "0.0.4",
+  "description": "An extensible html templating engine that generates static html. This means that it doesn't affect load times.",
+  "scripts": {
+    "install" : "scripts/install.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jomy10/pufferfish.git"
+  },
+  "keywords": [
+    "html",
+    "template",
+    "templates",
+    "templating-engine",
+    "compiler"
+  ],
+  "author": "Jonas Everaert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jomy10/pufferfish/issues"
+  },
+  "homepage": "https://github.com/Jomy10/pufferfish#readme"
+}
