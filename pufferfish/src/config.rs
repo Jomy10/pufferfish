@@ -3,7 +3,7 @@ use regex::Regex;
 use serde::Deserialize;
 use crate::{puf_arg, puf_arg_string};
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 /// Pufferfish config specified in toml
 pub struct PufferfishConfig {
     project: ProjectConfig,
@@ -11,7 +11,7 @@ pub struct PufferfishConfig {
     server: Option<ServerConfig>
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 struct ProjectConfig {
     html_dir: Option<String>,
     template_dir: Option<String>,
@@ -23,7 +23,7 @@ struct ProjectConfig {
     verbose: Option<bool>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 struct MinifyConfig {
     method: Option<String>,
     minify_doctype: Option<bool>,
@@ -38,7 +38,7 @@ struct MinifyConfig {
     remove_processing_instructions : Option<bool>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Clone)]
 struct ServerConfig {
     port: Option<String>
 }

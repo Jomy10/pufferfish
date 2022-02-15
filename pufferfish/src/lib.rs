@@ -5,6 +5,8 @@ pub use puf_dirs::*;
 pub mod build_html;
 pub mod dev_server;
 pub mod html_dependencies;
+#[cfg(feature = "file_listener")]
+pub mod file_listener;
 
 mod puf_dirs {
     use std::fs;
