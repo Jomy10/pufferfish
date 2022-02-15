@@ -115,7 +115,7 @@ Go to the dedicated [documentation](pufferfish.jonaseveraert.be/docs) or [tutori
 You can download Pufferfish with the following command:
 
 ```bash
-
+curl "https://raw.githubusercontent.com/Jomy10/pufferfish/master/installation/install.sh "| sh
 ```
 
 ### Manual installation
