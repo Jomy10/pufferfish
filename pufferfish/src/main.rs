@@ -38,7 +38,10 @@ fn main() {
         )
         .get_matches();
     
+    // File listener
     let config = PufferfishConfig::new();
+    let verbose_1 = config.verbose();
+    let verbose_2 = config.verbose();
     let mut listener = pufferfish::file_listener::FileListener::new(config);
     
     let listener = Arc::new(Mutex::new(listener));
@@ -46,14 +49,30 @@ fn main() {
     let (tx_c, _rx) = channel();
     
     let (listener_data, tx) = (Arc::clone(&listener), tx_c.clone());
+    let (listener_data_closure, tx_closure) = (Arc::clone(&listener), tx_c.clone());
     let h = thread::spawn(move || {
-        println!("Starting html listener");
-        FileListener::start_html(listener_data, tx, &PufferfishConfig::new());
+        if verbose_1 {
+            println!("Starting html listener");
+        }
+        FileListener::start_html(listener_data, tx, &PufferfishConfig::new(), |file_name| {
+            println!("Changed {file_name}");
+            // build this file and all files depending on it
+            let list = &listener_data_closure.lock().unwrap().dependant_list;
+            tx_closure.send(()).unwrap();
+        });
     });
     let (listener_data_templates, tx_templates) = (Arc::clone(&listener), tx_c.clone());
+    let (listener_data_templates_closure, tx_templates_closure) = (Arc::clone(&listener), tx_c.clone());
     let t = thread::spawn(move || {
-        println!("Starting template listener");
-        FileListener::start_templates(listener_data_templates, tx_templates, &PufferfishConfig::new());
+        if verbose_2 {
+            println!("Starting template listener");
+        }
+        FileListener::start_templates(listener_data_templates, tx_templates, &PufferfishConfig::new(), |file_name| {
+            println!("Changed {file_name}");
+            // build this file and all files depending on it
+            let list = &listener_data_templates_closure.lock().unwrap().dependant_list;
+            tx_templates_closure.send(()).unwrap();
+        });
     });
     
     h.join();

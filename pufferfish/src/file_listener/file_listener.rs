@@ -33,7 +33,7 @@ impl FileListener {
     // TODO: add closure that gets called on updates to be called to refresh the server
     //       also for `start_templates`
     /// Starts listening for file changes in html dir
-    pub fn start_html(this: Arc<Mutex<FileListener>>, tx: Sender<()>, config: &PufferfishConfig) {
+    pub fn start_html<Closure: Fn(&str) -> () + Copy>(this: Arc<Mutex<FileListener>>, tx: Sender<()>, config: &PufferfishConfig, on_change: Closure) {
         let (tx_watcher, rx) = channel();
         let mut watcher_html = watcher(tx_watcher, Duration::from_secs(10)).unwrap();
         watcher_html.watch(config.html_dir(), RecursiveMode::Recursive).unwrap();
@@ -41,7 +41,7 @@ impl FileListener {
         loop {
             match rx.recv() {
                 Ok(event) => {
-                    this.lock().unwrap().handle_event(event);
+                    this.lock().unwrap().handle_event(event, on_change);
                     tx.send(()).unwrap();
                 }, // TODO: If matches /.*~/ -> ignore, else -> match NoticeWriter, NoticeRemove or Wirte, Remove (potentially others) => Act accordingly
                 Err(e) => eprintln!("File listener error: {:?}", e)
@@ -50,7 +50,7 @@ impl FileListener {
     }
     
     /// Starts listening for file changes in templates dir
-    pub fn start_templates(this: Arc<Mutex<FileListener>>, tx: Sender<()>, config: &PufferfishConfig) {
+    pub fn start_templates<Closure: Fn(&str) -> () + Copy>(this: Arc<Mutex<FileListener>>, tx: Sender<()>, config: &PufferfishConfig, on_change: Closure) {
         let (tx_watcher, rx) = channel();
         let mut watcher_templates = watcher(tx_watcher, Duration::from_secs(10)).unwrap();
         watcher_templates.watch(config.template_dir(), RecursiveMode::Recursive).unwrap();
@@ -58,7 +58,7 @@ impl FileListener {
         loop {
             match rx.recv() {
                 Ok(event) => {
-                    this.lock().unwrap().handle_event(event);
+                    this.lock().unwrap().handle_event(event, on_change);
                     tx.send(()).unwrap();
                 }
                 Err(e) => eprintln!("File listener error: {:?}", e)
@@ -66,7 +66,7 @@ impl FileListener {
         }
     }
     
-    fn handle_event(&mut self, event: DebouncedEvent) {
+    fn handle_event<Closure: Fn(&str) -> ()>(&mut self, event: DebouncedEvent, on_change: Closure) {
         match event {
             DebouncedEvent::NoticeWrite(file) | DebouncedEvent::Write(file) |
             DebouncedEvent::NoticeRemove(file) | DebouncedEvent::Remove(file) |
@@ -76,11 +76,13 @@ impl FileListener {
                     // TODO: update only part of the listened files instead of recalculating all
                     //          -> Currently doesn't scale well for big projects
                     *self = Self::new(self.config.clone());
+                    on_change(file.to_str().unwrap());
                 }
             }
             DebouncedEvent::Rename(from_file, to_file) => {
                 // TODO: update only part of the listened files instead of recalculating all
                 *self = Self::new(self.config.clone());
+                on_change(from_file.to_str().unwrap());
             }
             DebouncedEvent::Chmod(_file) => { /*Ignored*/ }
             DebouncedEvent::Rescan => {

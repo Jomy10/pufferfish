@@ -3,10 +3,12 @@ pub mod cli;
 pub mod parser;
 pub use puf_dirs::*;
 pub mod build_html;
+#[cfg(feature = "server")]
 pub mod dev_server;
 pub mod html_dependencies;
 #[cfg(feature = "file_listener")]
 pub mod file_listener;
+pub mod html_beautifier;
 
 mod puf_dirs {
     use std::fs;
