@@ -1,3 +1,0 @@
-[submodule "htmlbeautifier"]
-	path = html_beautifier/htmlbeautifier
-	url = git@github.com:threedaymonk/htmlbeautifier.git
