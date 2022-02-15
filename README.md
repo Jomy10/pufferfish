@@ -15,8 +15,9 @@ A full-blown javascript framework is sometimes a bit overkill for a static websi
 
 - [Overview](#overview)
     - [Syntax](#syntax)
-    - [Compiling html](#compiling-your-html)
-    - [Build file](#build-file)
+    - [Setting up a Pufferfish project](#setting-up-a-pufferfish-project)
+    - [Compiling html](#compiling-html)
+    - [Config file](#config-file)
 - [Download](#download)
 - [Integrations](#integrations)
 - [Contributing](#contributing)
@@ -44,69 +45,80 @@ When compiled, the html above will expand to include the `menu.html`, `header.ht
 
 *In the future, Pufferfish will support passing variabls to html. Pufferfish is still in early development. If you have any suggestions for its future, please suggest them by opening an issue!*
 
-### Compiling your html
-You can either use the cli, or the [build file](#build-file) for compiling html. The latter is the easiest and most complete.
+### Setting up a Pufferfish project
 
-**Usage:**
-```bash
-puf <filename> [output_filename] -d [template_dir] -p
+The recommended folder structure for a Pufferfish project is the followng: 
+
+```
+project_name
+├── html
+├── output
+├── templates
+└── pufferfish.toml
 ```
 
-- `filename`: the file name of your html to be compiled
-- `output_filename`: the file name of the compiled html file (default: stdout)
-- `-d`: specifies a directory where pufferfish will look for templates. (default: .)
-- `-p`: prettify html
+- `html`: contains the html of your website (like the file shown in the [Syntax](#syntax) section as example).
+- `output`: contains the output of pufferfish.
+- `templates`: contains the files to be used as templates (e.g. `menu.html` in the example)
+- `Pufferfish.toml`: the configuration file for the project
 
-### Build file
-Pufferfish also includes a build file you can specify.
+These directories can also be set using the [config file](#config-file).
 
-You can name the file anyway you want. In the following example, it will be called `Config.rb`.
+#### Compiling html
+Inside of the directory of the project, run `puf build`. This will take into account the the [config file](#config-file) and build html to the output directory.
 
-*Config.rb*
-```ruby
-require 'pufferfish'
+### Config file
 
-Pufferfish::Builder.new(lambda { |b|
-    b.html_dir = "html" # default: .
-    b.template_dir = "templates" # default: .
-    b.output_dir = "output" # default: .
-    b.pretty = false # default: false
-    b.minify = true # default: false
-    b.minify_flags = "--collapse-whitespace --remove-comments --minify-css true --minify-js true --case-sensitive" # default: ""
-    b.verbose = true # default: false
-})
+Every Pufferfish project needs a `pufferfish.toml` file.
+
+The minimum config file looks like this:
+
+```toml
+[project]
 ```
 
-- `html_dir`: the directory where you the files will live that will be compiled to raw html.
-- `template_dir`: the directory where pufferfish will look for templates you use inside of your html.
-- `output_dir`: the directory where pufferfish will put the compiled html.
-- `pretty`: if set to true, the html will be prettified first.
-- `minify`: if set to true, the html will be minified first, requires that you have [html-minifier](https://github.com/kangax/html-minifier) installed. You can do this with `npm install html-minifier -g` (you might have to run it as sudo).
-- `minify_flags`: specify the flags for the minify command. All flags can be found [here](https://github.com/kangax/html-minifier). If no options are specified, almost nothing will happen. The above example shows a good starting point.
-- `verbose`: will show you what's going on during compilation.
+Here is a complete config file with all possible settings and their default values:
 
-To compile your html, run
-```bash
-ruby Config.rb
+```toml
+[project]
+html_dir = "html"
+template_dir = "templates"
+output_dir = "output"
+dev_dir = "output" # Default: set to `output_dir`
+pretty = false
+minify = false
+verbose = false
+ 
+[minify]
+method = "default" # values: (default | onepass)
+minify_doctype = true
+ensure_spec_compliant_unquoted_attribute_values = true
+keep_closing_tags = true
+keep_html_and_head_opening_tags = true
+keep_spaces_between_attributes = false
+keep_comments = false
+minify_css = true
+minify_js = true
+remove_bangs = false
+remove_processing_instructions = false
+
+[server]
+port = "8080"
 ```
+
+## Further documentation
+Go to the dedicated [documentation](pufferfish.jonaseveraert.be/docs) or [tutorial](pufferfish.jonaseveraert.be/tutorial) for more information on Pufferfish (**Currently not maintained due to refactor to Rust**).
+
 
 ## Download
-You can get Pufferfish from ruby gems.
-```bash
-gem install pufferfish
-```
-
-You can also download it from GitHub packages:
-```bash
-gem install pufferfish --source "https://rubygems.pkg.github.com/jomy10"
-```
+Currently, the way to download this is by going to the [Github releases](https://github.com/Jomy10/pufferfish/releases) and downloading the correct build for your operatin system 
 
 <!--
 If you want to, you can download it from npm `npm i pufferfish-html -g`, but I would recommend getting the Gems version.
 -->
 
 ## Integrations
-Pufferfish is made so it can be included in other build processes. It also includes integrations with [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier) and [html-minifier](https://github.com/kangax/html-minifier) when using the [build file](#build-file).
+Pufferfish is made so it can be included in other build processes. It also includes integrations with [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier) and [minify-html](https://crates.io/crates/minify-html) (and [minify-html-onepass](https://crates.io/crates/minify-html-onepass)).
 
 ## Contributing
 Contributions are always welcome. Read the [CONTRIBUTING](.github/CONTRIBUTING.md) file for more information!
