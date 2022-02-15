@@ -109,7 +109,6 @@ port = "8080"
 ## Further documentation
 Go to the dedicated [documentation](pufferfish.jonaseveraert.be/docs) or [tutorial](pufferfish.jonaseveraert.be/tutorial) for more information on Pufferfish (**Currently not maintained due to refactor to Rust**).
 
-
 ## Download
 
 You can download Pufferfish with the following command:
@@ -119,7 +118,22 @@ curl "https://raw.githubusercontent.com/Jomy10/pufferfish/master/installation/in
 ```
 
 ### Manual installation
-Head over to the [Github releases](https://github.com/Jomy10/pufferfish/releases) page and download the correct build for your operatin system. You now have an executable which can bee moved to the correct directory.
+Head over to the [Github releases](https://github.com/Jomy10/pufferfish/releases/latest) page and download the correct build for your operatin system. You now have an executable which can bee moved to the correct directory.
+
+### Manual compilation
+Pufferfish can be compiled for any platform, to do so, copy this repository:
+
+```bash
+git clone https://github.com/Jomy10/pufferfish.git
+```
+
+Then, go into the directory containing the project:
+
+```bash
+cd pufferfish/pufferfish
+```
+
+Run `cargo build --release` and the executable will be put in the `target` directory.
 
 <!--
 If you want to, you can download it from npm `npm i pufferfish-html -g`, but I would recommend getting the Gems version.
