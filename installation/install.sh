@@ -2,7 +2,7 @@
 
 echo "Installing pufferfish for your operating system 🐡"
 
-OS="unknown"
+OS="ostype_unknown"
 case "$OSTYPE" in
     linux*) OS="linux" ;;
     darwin*) OS="darwin" ;;
