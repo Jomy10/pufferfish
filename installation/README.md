@@ -1,7 +1,7 @@
 ## [`install.sh`](install.sh)
 The installation script installing pufferfish based on the platform
 
-**Installatoion**
+**Installation**
 ```bash
 curl "https://raw.githubusercontent.com/Jomy10/pufferfish/master/installation/install.sh" | sh
 ```
