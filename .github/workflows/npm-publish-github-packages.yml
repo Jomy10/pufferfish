@@ -44,7 +44,7 @@ jobs:
     - name: Upload
       uses: actions/download-artifact@v2
       with:
-        name: package
+        name: pufferfish-html
     - uses: actions/setup-node@v1
       with: 
         node-version: 14.x
