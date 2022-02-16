@@ -32,7 +32,7 @@ jobs:
     name: "Publish to GitHub Packages"
     needs: [package]
     runs-on: Ubuntu-latest
-    if: github.repository_owner == "Jomy10"
+    if: github.repository_owner == 'Jomy10'
     steps:
     - name: Upload
       uses: actions/download-artifact@v2
