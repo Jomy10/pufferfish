@@ -11,10 +11,10 @@ jobs:
         with:
           node-version: 14.x
       - name: npm install
-        working-directory: ./installation/npm/pufferfish
+        working-directory: ./installation/npm/pufferfish-gh-registry
         run: npm install
       - name: npm ci
-        working-directory: ./installation/npm/pufferfish
+        working-directory: ./installation/npm/pufferfish-gh-registry
         run: npm ci
   package: 
     needs: [build]
@@ -25,10 +25,10 @@ jobs:
         with:
           node-version: 14.x
       - name: npm ci_package
-        working-directory: ./installation/npm/pufferfish
+        working-directory: ./installation/npm/pufferfish-gh-registry
         run: npm ci
       - name: npm pack
-        working-directory: ./installation/npm/pufferfish
+        working-directory: ./installation/npm/pufferfish-gh-registry
         run: npm pack
       - name: Upload
         uses: actions/upload-artifact@v2
