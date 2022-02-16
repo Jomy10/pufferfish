@@ -1,3 +1,6 @@
+**EXAMPLE OUT OF DATE**
+TODO: replace with new example
+
 # Pufferfish example
 This folder contains a simple example to show the capabilities and workings of Pufferfish.
 

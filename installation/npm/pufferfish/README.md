@@ -117,7 +117,7 @@ You can download Pufferfish with the following command:
 curl "https://raw.githubusercontent.com/Jomy10/pufferfish/master/installation/install.sh" | sh
 ```
 
-Or, you can download the package from **npm**:
+Or, you can download the Pufferfish from **npm**:
 
 ```bash
 npm i -g pufferfish-html

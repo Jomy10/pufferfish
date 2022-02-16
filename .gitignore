@@ -1,4 +1,3 @@
-**/pufferfish-[0-9.]*.gems
 **/*.lock
 **/.DS_Store*
 **/.idea
