@@ -19,10 +19,10 @@ Project
 | | └ copyright.html
 | └ footer.html
 └ output
-└ Config.rb
+└ pufferfish.toml
 ```
 
-This folder structure is the recommended way to structure a project. The `Config.rb` file is the build file explained in the [Compiling html](https://pufferfish.jonaseveraert.be/docs/compiling_html#build-file) chapter, in this example we are using the exact same file.
+This folder structure is the recommended way to structure a project. The `pufferfish.toml` file is the build file explained in the [Compiling html](https://pufferfish.jonaseveraert.be/docs/compiling_html#build-file) chapter, in this example we are using the exact same file.
 <!--TODO: change link so it doesn't open in  new tab-->
 
 Our files are the following:
