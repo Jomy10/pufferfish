@@ -10,6 +10,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
+      - run: cd installation/npm/pufferfish
       - run: npm install
       - run: npm ci
   package: 
@@ -20,7 +21,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: cd installation/npm/pufferfish
       - run: npm ci
       - run: npm pack
       - name: Upload
