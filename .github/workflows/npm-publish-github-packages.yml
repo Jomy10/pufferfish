@@ -33,7 +33,7 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: package
+          name: pufferfish-html
           path: "./installation/npm/pufferfish/*.tgz"
   publish:
     name: "Publish to GitHub Packages"
@@ -49,9 +49,8 @@ jobs:
       with: 
         node-version: 14.x
         registry-url: https://npm.pkg.github.com/
-        # scope: "@jomy10"
-    # - run: echo "registry=https://npm.pkg.github.com/@jomy10" >>.npmrc
-    - run: echo "registry=https://npm.pkg.github.com/" >>.npmrc
+        scope: "@jomy10"
+    - run: echo "registry=https://npm.pkg.github.com/@jomy10" >>.npmrc
     - run: npm publish $(ls *.tgz)
       env:
         NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
