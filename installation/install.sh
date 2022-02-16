@@ -1,4 +1,6 @@
-echo "Installing pufferfish for your operating system..."
+# Pufferfish installation script
+
+echo "Installing pufferfish for your operating system 🐡"
 
 OS="unknown"
 case "$OSTYPE" in

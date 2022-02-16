@@ -1,4 +1,4 @@
-# Pufferfish
+# Pufferfish HTML Templating engine
 
 Pufferfish is an extensible html templating engine that generates raw html, meaning that it will not affect load times of websites.
 
