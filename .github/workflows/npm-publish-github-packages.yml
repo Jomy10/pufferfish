@@ -10,10 +10,15 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: cd installation/npm/pufferfish
-      - run: ls -a
-      - run: npm install
-      - run: npm ci
+      - name: ls
+        working-directory: ./installation/npm/pufferfish
+        run: ls -a
+      - name: npm install
+        working-directory: ./installation/npm/pufferfish
+        run: npm install
+      - name: npm ci
+        working-directory: ./installation/npm/pufferfish
+        run: npm ci
   package: 
     needs: [build]
     runs-on: ubuntu-latest
@@ -22,13 +27,17 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: npm ci
-      - run: npm pack
+      - name: npm ci_package
+        working-directory: ./installation/npm/pufferfish
+        run: npm ci
+      - name: npm pack
+        working-directory: ./installation/npm/pufferfish
+        run: npm pack
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
           name: package
-          path: "*.tgz"
+          path: "./installation/npm/pufferfish/*.tgz"
   publish:
     name: "Publish to GitHub Packages"
     needs: [package]
