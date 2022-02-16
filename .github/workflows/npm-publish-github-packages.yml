@@ -1,16 +1,50 @@
-on: push
+on: 
+  release:
+    types: [created]
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
-          node-version: 10
+          node-version: 14.x
       - run: npm install
-      - uses: JS-DevTools/npm-publish@v1
+      - run: npm ci
+  package: 
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
-          token: ${{ secrets.NPM_TOKEN }}
-          package: ./installation/npm/pufferfish/package.json
-          registry: https://npm.pkg.github.com
+          node-version: 14.x
+      - run: cd installation/npm/pufferfish
+      - run: npm ci
+      - run: npm pack
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: "*.tgz"
+  publish:
+    name: "Publish to GitHub Packages"
+    needs: [package]
+    runs-on: Ubuntu-latest
+    if: github.repository_owner == "Jomy10"
+    steps:
+    - name: Upload
+      uses: actions/download-artifact@v2
+      with:
+        name: package
+    - uses: actions/setup-node@v1
+      with: 
+        node-version: 14.x
+        registry-url: https://npm.pkg.github.com/
+        scope: "@jomy10"
+    - run: echo "registry=https://npm.pkg.github.com/@jomy10" >>.npmrc
+    - run: npm publish $(ls *.tgz)
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      
