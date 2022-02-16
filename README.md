@@ -6,8 +6,6 @@ A full-blown javascript framework is sometimes a bit overkill for a static websi
 
 **Pufferfish is still under heavy development**
 
-**The documentation is currently out of date with new releases**
-
 [To the documentation!](https://pufferfish.jonaseveraert.be)
 
 <details>
@@ -64,7 +62,7 @@ project_name
 
 These directories can also be set using the [config file](#config-file).
 
-#### Compiling html
+### Compiling html
 Inside of the directory of the project, run `puf build`. This will take into account the the [config file](#config-file) and build html to the output directory.
 
 ### Config file
@@ -117,7 +115,7 @@ You can download Pufferfish with the following command:
 curl "https://raw.githubusercontent.com/Jomy10/pufferfish/master/installation/install.sh" | sh
 ```
 
-Or, you can download the Pufferfish from **npm**:
+Or, you can download Pufferfish from **npm**:
 
 ```bash
 npm i -g pufferfish-html
@@ -142,10 +140,6 @@ cd pufferfish/pufferfish
 ```
 
 Run `cargo build --release` and the executable will be put in the `target` directory.
-
-<!--
-If you want to, you can download it from npm `npm i pufferfish-html -g`, but I would recommend getting the Gems version.
--->
 
 ## Integrations
 Pufferfish is made so it can be included in other build processes. It also includes integrations with [htmlbeautifier](https://github.com/threedaymonk/htmlbeautifier) and [minify-html](https://crates.io/crates/minify-html) (and [minify-html-onepass](https://crates.io/crates/minify-html-onepass)).
