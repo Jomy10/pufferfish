@@ -10,9 +10,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - name: ls
-        working-directory: ./installation/npm/pufferfish
-        run: ls -a
       - name: npm install
         working-directory: ./installation/npm/pufferfish
         run: npm install
@@ -52,8 +49,9 @@ jobs:
       with: 
         node-version: 14.x
         registry-url: https://npm.pkg.github.com/
-        scope: "@jomy10"
-    - run: echo "registry=https://npm.pkg.github.com/@jomy10" >>.npmrc
+        # scope: "@jomy10"
+    # - run: echo "registry=https://npm.pkg.github.com/@jomy10" >>.npmrc
+    - run: echo "registry=https://npm.pkg.github.com/" >>.npmrc
     - run: npm publish $(ls *.tgz)
       env:
         NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
