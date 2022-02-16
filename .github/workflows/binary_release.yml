@@ -20,7 +20,8 @@ jobs:
           changelog: CHANGELOG.md
         env:
           # (required)
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
+          working-directory: ./pufferfish
 
   upload-assets:
     strategy:
@@ -47,3 +48,4 @@ jobs:
         env:
           # (required)
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          working-directory: ./pufferfish
