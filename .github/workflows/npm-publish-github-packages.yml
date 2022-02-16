@@ -1,23 +1,16 @@
-name: Publish package to GitHub Packages
-on:
-  release:
-    types: [created]
+on: push
+
 jobs:
-  build:
-    runs-on: ubuntu-latest 
-    permissions: 
-      contents: read
-      packages: write 
+  publish:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      # Setup .npmrc file to publish to GitHub Packages
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
         with:
-          node-version: '16.x'
-          registry-url: 'https://npm.pkg.github.com'
-          # Defaults to the user or organization that owns the workflow file
-          scope: '@jomy10'
-      - run: npm ci
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          node-version: 10
+      - run: npm install
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./installation/npm/pufferfish/package.json
+          registry: https://npm.pkg.github.com
