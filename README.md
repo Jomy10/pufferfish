@@ -3,6 +3,7 @@
 [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/jomy10/pufferfish?include_prereleases)](#download)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jomy10/pufferfish/Cargo%20Release)](#download)
 [![npm](https://img.shields.io/npm/v/pufferfish-html)](https://www.npmjs.com/package/pufferfish-html)
+[![Website](https://img.shields.io/website?down_message=down&label=docs&up_message=up&url=https%3A%2F%2Fpufferfish.jonaseveraert.be)](https://pufferfish.jonaseveraert.be/docs/intro)
 
 Pufferfish is an extensible html templating engine that generates raw html, meaning that it will not affect load times of websites.
 
