@@ -1,23 +1,58 @@
-name: Publish package to GitHub Packages
-on:
+on: 
   release:
     types: [created]
+
 jobs:
   build:
-    runs-on: ubuntu-latest 
-    permissions: 
-      contents: read
-      packages: write 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: npm install
+        working-directory: ./installation/npm/pufferfish
+        run: npm install
+      - name: npm ci
+        working-directory: ./installation/npm/pufferfish
+        run: npm ci
+  package: 
+    needs: [build]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # Setup .npmrc file to publish to GitHub Packages
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v1
         with:
-          node-version: '16.x'
-          registry-url: 'https://npm.pkg.github.com'
-          # Defaults to the user or organization that owns the workflow file
-          scope: '@jomy10'
-      - run: npm ci
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          node-version: 14.x
+      - name: npm ci_package
+        working-directory: ./installation/npm/pufferfish
+        run: npm ci
+      - name: npm pack
+        working-directory: ./installation/npm/pufferfish
+        run: npm pack
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: "./installation/npm/pufferfish/*.tgz"
+  publish:
+    name: "Publish to GitHub Packages"
+    needs: [package]
+    runs-on: Ubuntu-latest
+    if: github.repository_owner == 'Jomy10'
+    steps:
+    - name: Upload
+      uses: actions/download-artifact@v2
+      with:
+        name: package
+    - uses: actions/setup-node@v1
+      with: 
+        node-version: 14.x
+        registry-url: https://npm.pkg.github.com/
+        # scope: "@jomy10"
+    # - run: echo "registry=https://npm.pkg.github.com/@jomy10" >>.npmrc
+    - run: echo "registry=https://npm.pkg.github.com/" >>.npmrc
+    - run: npm publish $(ls *.tgz)
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      
