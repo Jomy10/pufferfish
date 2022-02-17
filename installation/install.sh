@@ -14,7 +14,7 @@ case "$OSTYPE" in
 esac
 
 # Get the download url for the specific platform
-URL=$(curl "https://api.github.com/repos/jomy10/pufferfish/releases/latest" \
+URL=$(curl -s "https://api.github.com/repos/jomy10/pufferfish/releases/latest" \
     | grep "browser_download_url" \
     | grep "$OS" \
     | grep -v "sha256sum" \
@@ -41,7 +41,6 @@ then
     mkdir $EXTRACTED_PATH
 
     curl -L "$URL" --output "$TAR_FILE"
-    echo "File downloaded to $TAR_FILE"
     tar -xf "$TAR_FILE" -C "$EXTRACTED_PATH"
 
     EXEC_NAME="puf"
@@ -68,6 +67,7 @@ then
     mkdir $EXTRACTED_PATH
 
     curl -L "$URL" --output "$TAR_FILE"
+    # TODO: remove when a Linux user has confirmed this script works
     echo "File downloaded to $TAR_FILE"
     tar -xf "$TAR_FILE" -C "$EXTRACTED_PATH"
 
@@ -95,6 +95,7 @@ then
     mkdir $EXTRACTED_PATH
 
     curl -L "$URL" --output "$ZIP_FILE"
+    # TODO: remove when a Windows user has confirmed this script works
     echo "File downloaded to $ZIP_FILE"
     unzip -d "$EXTRACTED_PATH" "$ZIP_FILE"
 
@@ -102,4 +103,4 @@ then
     mv "$EXTRACTED_PATH$EXEC_NAME" "\Windows\System32\$EXEC_NAME"
 fi
 
-echo "Done."
+echo "Installed $(puf --version) 🐡"
