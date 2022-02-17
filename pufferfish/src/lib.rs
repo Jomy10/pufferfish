@@ -2,7 +2,7 @@ pub mod config;
 pub mod cli;
 pub mod parser;
 pub use puf_dirs::*;
-pub mod build_html;
+
 #[cfg(feature = "server")]
 pub mod dev_server;
 pub mod html_dependencies;

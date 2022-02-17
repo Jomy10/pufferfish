@@ -1,8 +1,8 @@
 use std::fs;
-use std::path::{PathBuf};
+use std::path::PathBuf;
 use clap::ArgMatches;
-use crate::build_html::build_html_file;
-use crate::config::{PufferfishConfig};
+use crate::cli::build_html::build_html_file;
+use crate::config::PufferfishConfig;
 
 pub struct CLIExecutor {
     matches: ArgMatches
@@ -28,7 +28,7 @@ impl CLIExecutor {
             let clean = if matches.is_present("clean") {
                 true
             } else { false };
-            build_html_file(PathBuf::from(name).as_path(), config, clean);
+            build_html_file(PathBuf::from(name).as_path(), config, clean, false);
         } else {
             let clean = if matches.is_present("clean") {
                 true
@@ -38,7 +38,7 @@ impl CLIExecutor {
             for file in html_files {
                 let file = file.unwrap().path();
                 let file = file.strip_prefix(&html_dir).unwrap(); // Strip base html path
-                build_html_file(file, config, clean);
+                build_html_file(file, config, clean, false);
             }
         }
     }
