@@ -105,7 +105,7 @@ port = "8080"
 ```
 
 ## Further documentation
-Go to the dedicated [documentation](pufferfish.jonaseveraert.be/docs) or [tutorial](pufferfish.jonaseveraert.be/tutorial) for more information on Pufferfish (**Currently not maintained due to refactor to Rust**).
+Go to the dedicated [documentation](pufferfish.jonaseveraert.be/docs/intro) or [tutorial](pufferfish.jonaseveraert.be/tutorial/intro) for more information on Pufferfish.
 
 ## Download
 
