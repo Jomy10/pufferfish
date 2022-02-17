@@ -2,7 +2,7 @@ use std::fmt::Debug;
 use std::fs;
 use std::path::{Path, PathBuf};
 use regex::Regex;
-use crate::config::PufferfishConfig;
+use crate::pufferfish_core::config::PufferfishConfig;
 use crate::html_dependencies::dependency;
 
 /// Generate dependency graph for html files

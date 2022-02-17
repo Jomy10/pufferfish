@@ -1,5 +1,5 @@
 use crate::cli::file_listener;
-use crate::config::PufferfishConfig;
+use crate::pufferfish_core::config::PufferfishConfig;
 use crate::dev_server::PufferfishDevServer;
 
 pub fn start_development_server(config: &PufferfishConfig) {

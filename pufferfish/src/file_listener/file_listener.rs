@@ -6,7 +6,7 @@ use std::time::Duration;
 use notify::{Watcher, RecursiveMode, watcher, DebouncedEvent};
 use regex::Regex;
 use simple_colors::red;
-use crate::config::PufferfishConfig;
+use crate::pufferfish_core::config::PufferfishConfig;
 use crate::html_dependencies::dependant::DependantList;
 use crate::html_dependencies::dependency_graph;
 
@@ -86,10 +86,10 @@ impl FileListener {
     /// - The file if it was the correct event
     fn handle_event(&mut self, event: DebouncedEvent) -> Option<String> {
         match event {
+            // TODO: on remove, just remove the file from the output directory (if html)
             DebouncedEvent::NoticeWrite(file) | DebouncedEvent::Write(file) |
             DebouncedEvent::NoticeRemove(file) | DebouncedEvent::Remove(file) |
             DebouncedEvent::Create(file) => {
-                println!("Handling event");
                 if !Regex::new(r".*~").unwrap().is_match(file.to_str().unwrap()) {
                     // file is changed
                     // TODO: update only part of the listened files instead of recalculating all
@@ -97,7 +97,6 @@ impl FileListener {
                     *self = Self::new(self.config.clone());
                     Some(file.to_str().unwrap().to_string())
                 } else {
-                    println!("temp change");
                     None
                 }
             }

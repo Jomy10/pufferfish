@@ -2,7 +2,12 @@ use std::fs;
 use std::path::PathBuf;
 use regex::Regex;
 use simple_server::{Method, Server, StatusCode};
-use crate::config::PufferfishConfig;
+use crate::pufferfish_core::config::PufferfishConfig;
+
+// TODO: live reload for server when a file is changed (maybe append a websocket listener to
+//       html that will reload when it receives something.
+//       concrete: have a "standard lib" script for pufferfish and add a script tag to html loaded
+//       by the server
 
 #[cfg(feature = "server")]
 /// Development server for Pufferfish. Serving files in the `dev_dir`.
@@ -61,7 +66,7 @@ impl<'a> PufferfishDevServer<'a> {
         unsafe {
             // Set serve dir to dev_dir
             // TODO (css, js, images, ...) -> create assets folder, maybe have a template for assets in html
-            // : self.server.as_mut().unwrap_unchecked().set_static_directory(PathBuf::from(std::env::current_dir().unwrap().join(self.config.dev_dir())));
+            self.server.as_mut().unwrap_unchecked().set_static_directory(PathBuf::from(std::env::current_dir().unwrap().join(self.config.assets_dir())));
             // Start server
             self.server.as_ref().unwrap_unchecked().listen(host, port)
         };

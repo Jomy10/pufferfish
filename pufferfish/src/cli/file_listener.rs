@@ -3,9 +3,9 @@ use std::sync::{Arc, RwLock};
 use std::thread;
 use std::thread::JoinHandle;
 use regex::Regex;
-use crate::cli::build_html::build_html_file;
-use crate::config::PufferfishConfig;
+use crate::cli::build::build_html::build_html_file;
 use crate::file_listener::FileListener;
+use crate::pufferfish_core::config::PufferfishConfig;
 
 /// Starts the file listeners building files as they get updated.
 ///

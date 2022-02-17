@@ -17,6 +17,7 @@ struct ProjectConfig {
     template_dir: Option<String>,
     output_dir: Option<String>,
     cache_dir: Option<String>,
+    assets_dir: Option<String>,
     dev_dir: Option<String>,
     pretty: Option<bool>,
     minify: Option<bool>,
@@ -59,6 +60,7 @@ impl PufferfishConfig {
                 output_dir: None,
                 cache_dir: None,
                 dev_dir: None,
+                assets_dir: None,
                 pretty: None,
                 minify: None,
                 verbose: None
@@ -102,6 +104,10 @@ impl PufferfishConfig {
     
     pub fn dev_dir(&self) -> String {
         self.project.dev_dir.clone().unwrap_or(self.output_dir())
+    }
+    
+    pub fn assets_dir(&self) -> String {
+        self.project.assets_dir.clone().unwrap_or("assets".to_string())
     }
     
     pub fn pretty(&self) -> bool {

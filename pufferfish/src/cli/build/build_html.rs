@@ -1,8 +1,9 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 use minify_html::minify;
-use crate::config::{MinifyMethod, PufferfishConfig};
-use crate::{html_beautifier, parser};
+use crate::pufferfish_core::config::{MinifyMethod, PufferfishConfig};
+use crate::{html_beautifier};
+use crate::pufferfish_core::parser;
 
 /// Build & write 1 file
 /// - `clean`: don't use cached files

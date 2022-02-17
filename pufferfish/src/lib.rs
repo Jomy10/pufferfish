@@ -1,6 +1,4 @@
-pub mod config;
 pub mod cli;
-pub mod parser;
 pub use puf_dirs::*;
 
 #[cfg(feature = "server")]
@@ -9,6 +7,7 @@ pub mod html_dependencies;
 #[cfg(feature = "file_listener")]
 pub mod file_listener;
 pub mod html_beautifier;
+pub mod pufferfish_core;
 
 mod puf_dirs {
     use std::fs;
