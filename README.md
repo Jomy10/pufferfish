@@ -54,6 +54,7 @@ The recommended folder structure for a Pufferfish project is the followng:
 
 ```
 project_name
+├── assets
 ├── html
 ├── output
 ├── templates
@@ -87,7 +88,7 @@ Here is a complete config file with all possible settings and their default valu
 html_dir = "html"
 template_dir = "templates"
 output_dir = "output"
-dev_dir = "output" # Default: set to `output_dir`
+assets_dir = "assets"
 pretty = false
 minify = false
 verbose = false
