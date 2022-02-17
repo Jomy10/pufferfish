@@ -130,7 +130,7 @@ npm i -g pufferfish-html
 Test if the package was installed using `puf --version`.
 
 ### Manual installation
-Head over to the [Github releases](https://github.com/Jomy10/pufferfish/releases/latest) page and download the correct build for your operatin system. You now have an executable which can bee moved to the correct directory.
+Head over to the [Github releases](https://github.com/Jomy10/pufferfish/releases/latest) page and download the correct build for your operating system. You now have an executable which can be moved to the correct directory (e.g. `/usr/local/bin`).
 
 ### Manual compilation
 Pufferfish can be compiled for any platform, to do so, copy this repository:
