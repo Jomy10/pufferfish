@@ -2,6 +2,7 @@ use std::fs;
 use std::path::PathBuf;
 use clap::ArgMatches;
 use crate::cli::build_html::build_html_file;
+use crate::cli::dev_server;
 use crate::config::PufferfishConfig;
 
 pub struct CLIExecutor {
@@ -16,6 +17,7 @@ impl CLIExecutor {
         let config = PufferfishConfig::from_toml("pufferfish.toml");
         match self.matches.subcommand() {
             Some(("build", matches)) => Self::execute_build(matches, &config),
+            Some(("start", matches)) => Self::execute_start(matches, &config),
             Some((unknown, _)) => eprintln!("Unknown subcommand {unknown}"),
             None => {}
         }
@@ -41,5 +43,9 @@ impl CLIExecutor {
                 build_html_file(file, config, clean, false);
             }
         }
+    }
+    
+    fn execute_start(_matches: &ArgMatches, config: &PufferfishConfig) {
+        dev_server::start_development_server(config);
     }
 }
