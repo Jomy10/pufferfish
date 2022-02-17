@@ -66,7 +66,7 @@ impl<'a> PufferfishDevServer<'a> {
         unsafe {
             // Set serve dir to dev_dir
             // TODO (css, js, images, ...) -> create assets folder, maybe have a template for assets in html
-            self.server.as_mut().unwrap_unchecked().set_static_directory(PathBuf::from(std::env::current_dir().unwrap().join(self.config.assets_dir())));
+            self.server.as_mut().unwrap_unchecked().set_static_directory(conf.output_dir());
             // Start server
             self.server.as_ref().unwrap_unchecked().listen(host, port)
         };
