@@ -30,6 +30,8 @@ will be used to replace temlates inside of html
 will be copied to output/assets.
 Any arbitrary amount of folders can be specified in the config to be copied to the output.
 
+An assets folder can also be (optionally) specified. Then the @css/index syntax can be used to import assets in html. Which will always be put inside of the head tag of the top most node.
+
 ### output
 the folder where all generated files will be located
 
