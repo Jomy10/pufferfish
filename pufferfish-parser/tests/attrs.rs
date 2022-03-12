@@ -73,3 +73,18 @@ fn multiline_single_line_attr() {
         (attrs.get("attr1").unwrap(), attrs.get("attr2").unwrap())
     )
 }
+#[test]
+fn get_attr() {
+    let test = r#"
+    %teemp?attr1=<
+    <p>my template text</p>
+    >,
+    attr2 =
+    "hello world"%
+    "#;
+    let template = &PufferfishFile::parse(test).templates[0];
+    assert_eq!(
+        (&"    <p>my template text</p>", &"hello world"),
+        (template.get_attr("attr1").unwrap(), template.get_attr("attr2").unwrap())
+    )
+}

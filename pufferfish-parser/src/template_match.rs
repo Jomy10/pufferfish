@@ -93,17 +93,38 @@ impl<'a> TemplateMatch<'a> {
         self.attrs.get(&attr)
     }
     
+    // TODO: all parsed values -> lazy static; only computed once
+    /// Returns the value of an attribute with all `\%` replaced with `%`
+    pub fn get_attr_parsed(&self, attr: &'a str) -> Option<String> {
+        if let Some(val) = self.attrs.get(attr) {
+            Some(val.replace("\\%", "%").replace(r"\\", ""))
+        } else {
+            None
+        }
+    }
+    
+    /// Returns the value of an attribute with all `\%` replaced with `%`
+    pub unsafe fn get_attr_parsed_unchecked(&self, attr: &'a str) -> String {
+        self.attrs.get(attr).unwrap_unchecked().replace(r"\%", "%").replace(r"\\", "")
+    }
+    
     /// Returns the file name of the template
     pub fn get_file_name(&self) -> String {
         lazy_static! {
-            static ref HTML_FILE_REGEX: Regex = Regex::new(r"%.*?\..*%").unwrap();
+            static ref HTML_FILE_REGEX: Regex = Regex::new(r".*?\..*").unwrap();
         }
         
-        return if HTML_FILE_REGEX.is_match(self.text) {
-            self.text[1..self.text.len()-1].to_string()
+        return if HTML_FILE_REGEX.is_match(self.template_name) {
+            self.template_name.to_string()
         } else {
-            let file_name: &str = &self.text[1..self.text.len()-1];
+            let file_name: &str = &self.template_name.replace(r"\%", "%").replace(r"\\", "");
             concat_strs! {file_name, ".html"}
         };
+    }
+    
+    /// Returns the template name, with all `\%` replaced with `\%`
+    pub fn get_template_name(&self) -> String {
+        println!("{:?}", self.template_name);
+        self.template_name.replace(r"\%","%").replace(r"\\", "")
     }
 }

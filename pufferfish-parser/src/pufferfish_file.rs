@@ -25,14 +25,8 @@ impl<'a> PufferfishFile<'a> {
         
         let templates: Vec<TemplateMatch> = TEMPLATE_REGEX.find_iter(&text).map(|m| {
             let m = m.unwrap();
-            // No escape characters
-            //if &text.get(m.start()-1..m.start()).unwrap_or("l") != &"\\" && &text[m.end()-1..m.end()] != "\\" {
-                Some(TemplateMatch::parse(&text[m.start()..m.end()]))
-            // } else {
-            //     None
-            // }
-        }).filter(|v| { println!("{:?}", v); v.is_some() }).map(|v| { println!("{:?}", v); v.unwrap() }).collect();
-        println!("templates: {:?}", templates);
+            TemplateMatch::parse(&text[m.start()..m.end()])
+        }).collect();
         
         Self {
             text,

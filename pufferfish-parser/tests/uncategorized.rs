@@ -18,7 +18,6 @@ fn file_name_extension() {
 }
 // TODO: too much gets trimmed from the end when using <> and multiple new lines (only last new line
 //       and following spaces should be trimmed
-#[ignore]
 #[test]
 fn funky_syntax() {
     let test = r#"
