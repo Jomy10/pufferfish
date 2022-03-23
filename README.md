@@ -9,7 +9,7 @@ Pufferfish is an extensible html templating engine that generates raw html, mean
 
 A full-blown javascript framework is sometimes a bit overkill for a static website. Pufferfish adds some simple templating to html so you don't have to use such a framework for small projects or for pages that require fast loading. Pufferfish will compile your files to raw html.
 
-**Pufferfish is still under heavy development**
+**Pufferfish is still under heavy development - A 1.0 release is currently being developped in the `1.0` branch. This is a restructure of the project and will implement a lot of new features**
 
 [To the documentation!](https://pufferfish.jonaseveraert.be)
 
