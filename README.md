@@ -11,6 +11,9 @@ A full-blown javascript framework is sometimes a bit overkill for a static websi
 
 **Pufferfish is still under heavy development - A 1.0 release is currently being developped in the `1.0` branch. This is a restructure of the project and will implement a lot of new features**
 
+> [!WARNING]
+> This repository is no longer actively mainained
+
 [To the documentation!](https://pufferfish.jonaseveraert.be)
 
 <details>
